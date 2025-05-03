@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Delta - Esercito Italiano Roblox RP</title>
+    <style>
+        :root {
+            --primary-color: #006341;
+            --secondary-color: #E1E1E1;
+            --accent-color: #8B0000;
+            --text-color: #333;
+            --light-text: #FFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .logo {
+            max-width: 200px;
+            margin-bottom: 1rem;
+        }
+        
+        nav {
+            background-color: var(--accent-color);
+            padding: 0.5rem 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .tryout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .tryout-card {
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .tryout-card h3 {
+            color: var(--accent-color);
+        }
+        
+        .tryout-card .date {
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: var(--primary-color);
+        }
+        
+        .tryout-card img {
+            width: 100%;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery img {
+            width: 100%;
+            border-radius: 4px;
+            transition: transform 0.3s;
+        }
+        
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+        
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .link-card {
+            background-color: var(--secondary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .link-card img {
+            width: 60px;
+            margin-bottom: 1rem;
+        }
+        
+        .admin-panel {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .admin-panel h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #004d32;
+        }
+        
+        .btn-danger {
+            background-color: var(--accent-color);
+        }
+        
+        .btn-danger:hover {
+            background-color: #6b0000;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://via.placeholder.com/200x100?text=Base+Delta+Logo" alt="Base Delta Logo" class="logo">
+        <h1>Base Delta - Esercito Italiano Roblox RP</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('tryout')">Provini</a></li>
+            <li><a href="#" onclick="showSection('about')">Chi Siamo</a></li>
+            <li><a href="#" onclick="showSection('links')">Collegamenti</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home-section" class="section">
+            <h2>Benvenuti a Base Delta</h2>
+            <p>Base Delta è un server Discord RP dedicato alla simulazione dell'Esercito Italiano su Roblox. Il nostro obiettivo è ricreare un'esperienza autentica e coinvolgente per tutti gli appassionati di ruolo militare.</p>
+            
+            <h3>Informazioni Principali</h3>
+            <p>Il nostro server offre:</p>
+            <ul>
+                <li>Divisioni specializzate dell'Esercito Italiano</li>
+                <li>Eventi regolari e addestramenti</li>
+                <li>Una community attiva e rispettosa</li>
+                <li>Opportunità di crescita e promozioni</li>
+                <li>Simulazioni realistiche</li>
+            </ul>
+            
+            <h3>Unisciti a Noi</h3>
+            <p>Se sei interessato a far parte della nostra community, visita la sezione "Provini" per vedere quando si terranno i prossimi reclutamenti per le diverse divisioni.</p>
+        </section>
+        
+        <!-- Tryout Section -->
+        <section id="tryout-section" class="section hidden">
+            <h2>Provini delle Divisioni</h2>
+            <p>Qui puoi trovare le date dei prossimi provini per le nostre divisioni. Le date possono essere modificate dallo staff.</p>
+            
+            <div id="admin-login-tryout" class="admin-panel">
+                <h3>Accesso Staff</h3>
+                <div class="form-group">
+                    <label for="admin-email-tryout">Email Staff</label>
+                    <input type="email" id="admin-email-tryout" placeholder="Inserisci l'email autorizzata">
+                </div>
+                <button class="btn" onclick="loginTryoutAdmin()">Accedi</button>
+            </div>
+            
+            <div id="tryout-admin-panel" class="admin-panel hidden">
+                <h3>Pannello Staff Provini</h3>
+                <div class="form-group">
+                    <label for="division-select">Divisione</label>
+                    <select id="division-select">
+                        <option value="carabinieri">Carabinieri</option>
+                        <option value="marina">Marina Militare</option>
+                        <option value="aereonautica">Aereonautica</option>
+                        <option value="bersaglieri">Bersaglieri</option>
+                        <option value="dfa">DFA</option>
+                        <option value="alpini">Alpini</option>
+                        <option value="comfose">COMFOSE</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tryout-date">Data Provino</label>
+                    <input type="datetime-local" id="tryout-date">
+                </div>
+                <div class="form-group">
+                    <label for="tryout-image">URL Immagine (opzionale)</label>
+                    <input type="text" id="tryout-image" placeholder="Incolla URL immagine">
+                </div>
+                <button class="btn" onclick="updateTryout()">Aggiorna Provino</button>
+                <button class="btn btn-danger" onclick="logoutTryoutAdmin()">Esci</button>
+            </div>
+            
+            <div class="tryout-grid" id="tryout-container">
+                <!-- Tryout cards will be generated here -->
+            </div>
+        </section>
+        
+        <!-- About Us Section -->
+        <section id="about-section" class="section hidden">
+            <h2>Chi Siamo</h2>
+            <p>Base Delta è una community dedicata alla simulazione dell'Esercito Italiano su Roblox. Siamo un gruppo di appassionati che condividono l'interesse per il ruolo militare e la simulazione realistica.</p>
+            
+            <div id="admin-login-about" class="admin-panel">
+                <h3>Accesso Staff</h3>
+                <div class="form-group">
+                    <label for="admin-email-about">Email Staff</label>
+                    <input type="email" id="admin-email-about" placeholder="Inserisci l'email autorizzata">
+                </div>
+                <button class="btn" onclick="loginAboutAdmin()">Accedi</button>
+            </div>
+            
+            <div id="about-admin-panel" class="admin-panel hidden">
+                <h3>Pannello Staff Galleria</h3>
+                <div class="form-group">
+                    <label for="image-url">URL Immagine</label>
+                    <input type="text" id="image-url" placeholder="Incolla URL immagine">
+                </div>
+                <button class="btn" onclick="addImageToGallery()">Aggiungi Immagine</button>
+                <button class="btn btn-danger" onclick="logoutAboutAdmin()">Esci</button>
+            </div>
+            
+            <h3>La Nostra Bacheca</h3>
+            <div class="gallery" id="gallery-container">
+                <!-- Gallery images will be generated here -->
+            </div>
+        </section>
+        
+        <!-- Links Section -->
+        <section id="links-section" class="section hidden">
+            <h2>Collegamenti</h2>
+            <p>Unisciti alla nostra community o visita i nostri spazi su Roblox!</p>
+            
+            <div class="links">
+                <div class="link-card">
+                    <img src="https://via.placeholder.com/60?text=Discord" alt="Discord">
+                    <h3>Discord</h3>
+                    <p>Unisciti al nostro server</p>
+                    <button class="btn" onclick="window.open('https://discord.gg/example', '_blank')">Entra</button>
+                </div>
+                
+                <div class="link-card">
+                    <img src="https://via.placeholder.com/60?text=Roblox" alt="Roblox">
+                    <h3>Gruppo Roblox</h3>
+                    <p>Visita il nostro gruppo</p>
+                    <button class="btn" onclick="window.open('https://www.roblox.com/groups/example', '_blank')">Vai</button>
+                </div>
+                
+                <div class="link-card">
+                    <img src="https://via.placeholder.com/60?text=Mappa" alt="Mappa">
+                    <h3>Mappa Roblox</h3>
+                    <p>Gioca nella nostra mappa</p>
+                    <button class="btn" onclick="window.open('https://www.roblox.com/games/example', '_blank')">Gioca</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Base Delta - Esercito Italiano Roblox RP. Tutti i diritti riservati.</p>
+    </footer>
+    
+    <script>
+        // Admin credentials (to be set by the site creator)
+        const ADMIN_EMAIL = "admin@basedelta.com"; // CHANGE THIS TO YOUR EMAIL
+        
+        // Tryout data
+        let tryouts = {
+            carabinieri: {
+                date: "2023-06-15T18:00",
+                image: "https://via.placeholder.com/300x200?text=Carabinieri"
+            },
+            marina: {
+                date: "2023-06-16T18:00",
+                image: "https://via.placeholder.com/300x200?text=Marina+Militare"
+            },
+            aereonautica: {
+                date: "2023-06-17T18:00",
+                image: "https://via.placeholder.com/300x200?text=Aereonautica"
+            },
+            bersaglieri: {
+                date: "2023-06-18T18:00",
+                image: "https://via.placeholder.com/300x200?text=Bersaglieri"
+            },
+            dfa: {
+                date: "2023-06-19T18:00",
+                image: "https://via.placeholder.com/300x200?text=DFA"
+            },
+            alpini: {
+                date: "2023-06-20T18:00",
+                image: "https://via.placeholder.com/300x200?text=Alpini"
+            },
+            comfose: {
+                date: "2023-06-21T18:00",
+                image: "https://via.placeholder.com/300x200?text=COMFOSE"
+            }
+        };
+        
+        // Gallery images
+        let galleryImages = [
+            "https://via.placeholder.com/300x200?text=Evento+1",
+            "https://via.placeholder.com/300x200?text=Evento+2",
+            "https://via.placeholder.com/300x200?text=Evento+3"
+        ];
+        
+        // Show section function
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            document.getElementById(sectionId + '-section').classList.remove('hidden');
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+            renderTryouts();
+            renderGallery();
+        });
+        
+        // Render tryout cards
+        function renderTryouts() {
+            const container = document.getElementById('tryout-container');
+            container.innerHTML = '';
+            
+            const divisions = [
+                { id: 'carabinieri', name: 'Carabinieri' },
+                { id: 'marina', name: 'Marina Militare' },
+                { id: 'aereonautica', name: 'Aereonautica' },
+                { id: 'bersaglieri', name: 'Bersaglieri' },
+                { id: 'dfa', name: 'DFA' },
+                { id: 'alpini', name: 'Alpini' },
+                { id: 'comfose', name: 'COMFOSE' }
+            ];
+            
+            divisions.forEach(division => {
+                const tryout = tryouts[division.id];
+                const date = new Date(tryout.date);
+                const formattedDate = date.toLocaleString('it-IT', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                const card = document.createElement('div');
+                card.className = 'tryout-card';
+                card.innerHTML = `
+                    <h3>${division.name}</h3>
+                    <p class="date">${formattedDate}</p>
+                    <img src="${tryout.image}" alt="${division.name}">
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+        
+        // Render gallery images
+        function renderGallery() {
+            const container = document.getElementById('gallery-container');
+            container.innerHTML = '';
+            
+            galleryImages.forEach(imageUrl => {
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = "Galleria Base Delta";
+                container.appendChild(img);
+            });
+        }
+        
+        // Admin functions for tryout section
+        function loginTryoutAdmin() {
+            const email = document.getElementById('admin-email-tryout').value;
+            
+            if (email === ADMIN_EMAIL) {
+                document.getElementById('admin-login-tryout').classList.add('hidden');
+                document.getElementById('tryout-admin-panel').classList.remove('hidden');
+            } else {
+                alert('Email non autorizzata');
+            }
+        }
+        
+        function logoutTryoutAdmin() {
+            document.getElementById('admin-login-tryout').classList.remove('hidden');
+            document.getElementById('tryout-admin-panel').classList.add('hidden');
+            document.getElementById('admin-email-tryout').value = '';
+        }
+        
+        function updateTryout() {
+            const division = document.getElementById('division-select').value;
+            const date = document.getElementById('tryout-date').value;
+            const image = document.getElementById('tryout-image').value;
+            
+            if (division && date) {
+                tryouts[division].date = date;
+                if (image) tryouts[division].image = image;
+                
+                renderTryouts();
+                alert('Provino aggiornato con successo!');
+            } else {
+                alert('Per favore, compila tutti i campi richiesti');
+            }
+        }
+        
+        // Admin functions for about section
+        function loginAboutAdmin() {
+            const email = document.getElementById('admin-email-about').value;
+            
+            if (email === ADMIN_EMAIL) {
+                document.getElementById('admin-login-about').classList.add('hidden');
+                document.getElementById('about-admin-panel').classList.remove('hidden');
+            } else {
+                alert('Email non autorizzata');
+            }
+        }
+        
+        function logoutAboutAdmin() {
+            document.getElementById('admin-login-about').classList.remove('hidden');
+            document.getElementById('about-admin-panel').classList.add('hidden');
+            document.getElementById('admin-email-about').value = '';
+        }
+        
+        function addImageToGallery() {
+            const imageUrl = document.getElementById('image-url').value;
+            
+            if (imageUrl) {
+                galleryImages.push(imageUrl);
+                renderGallery();
+                document.getElementById('image-url').value = '';
+                alert('Immagine aggiunta alla galleria!');
+            } else {
+                alert('Per favore, inserisci un URL valido');
+            }
+        }
+    </script>
+</body>
+</html>
