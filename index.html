@@ -275,9 +275,14 @@
                         <button onclick="toggleConcorsoStatus('comfose')" id="comfose-status-btn" class="w-full status-open text-white font-bold py-2 px-4 rounded">APERTO</button>
                     </div>
                 </div>
-                <button onclick="adminLogout()" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
-                    Logout Admin
-                </button>
+                <div class="flex space-x-4">
+                    <button onclick="adminLogout()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                        Logout Admin
+                    </button>
+                    <button onclick="saveConcorsiStatus()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Salva Stato
+                    </button>
+                </div>
             </div>
             
             <!-- Contest Cards -->
@@ -638,6 +643,27 @@
             comfose: true
         };
         
+        // Load saved status from localStorage
+        function loadConcorsiStatus() {
+            const savedStatus = localStorage.getItem('concorsiStatus');
+            if (savedStatus) {
+                const parsedStatus = JSON.parse(savedStatus);
+                Object.assign(concorsiStatus, parsedStatus);
+                
+                // Update UI based on loaded status
+                updateConcorsoStatus('marina');
+                updateConcorsoStatus('aeronautica');
+                updateConcorsoStatus('carabinieri');
+                updateConcorsoStatus('comfose');
+            }
+        }
+        
+        // Save status to localStorage
+        function saveConcorsiStatus() {
+            localStorage.setItem('concorsiStatus', JSON.stringify(concorsiStatus));
+            alert('Stato dei concorsi salvato con successo!');
+        }
+        
         // Tab functionality
         function changeTab(tabId) {
             // Hide all tab contents
@@ -833,8 +859,9 @@
             }
         }
         
-        // Initialize with home tab active
+        // Initialize with home tab active and load saved status
         changeTab('home');
+        loadConcorsiStatus();
     </script>
 </body>
 </html>
