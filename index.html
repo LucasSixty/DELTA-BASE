@@ -3,550 +3,838 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base Delta - Esercito Italiano</title>
+    <title>BASE DELTA | Comunità Discord</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #006341;
-            --secondary-color: #E1E1E1;
-            --accent-color: #8B0000;
-            --text-color: #333;
-            --light-text: #FFF;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary: #4CAF50; /* Green */
+            --secondary: #23272A;
+            --accent: #57F287;
         }
         
         body {
-            background-color: #f5f5f5;
-            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+            background-color: #1e1e2e;
+            color: white;
+            scroll-behavior: smooth;
         }
         
-        header {
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            padding: 1rem 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        .title-font {
+            font-family: 'Orbitron', sans-serif;
         }
         
-        .logo {
-            max-width: 200px;
-            margin-bottom: 1rem;
+        .discord-bg {
+            background-color: var(--secondary);
         }
         
-        nav {
-            background-color: var(--accent-color);
-            padding: 0.5rem 0;
+        .discord-primary {
+            background-color: var(--primary);
         }
         
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
+        .discord-accent {
+            background-color: var(--accent);
         }
         
-        nav li {
-            margin: 0 1.5rem;
+        .glow {
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
         }
         
-        nav a {
-            color: var(--light-text);
-            text-decoration: none;
-            font-weight: bold;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+        .card-hover {
+            transition: all 0.3s ease;
         }
         
-        nav a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        
-        .section {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        h1, h2, h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        
-        p {
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        
-        .tryout-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .tryout-card {
-            background-color: var(--secondary-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .tryout-card h3 {
-            color: var(--accent-color);
-        }
-        
-        .tryout-card .date {
-            font-weight: bold;
-            margin: 0.5rem 0;
-            color: var(--primary-color);
-        }
-        
-        .tryout-card img {
-            width: 100%;
-            border-radius: 4px;
-            margin-top: 1rem;
-        }
-        
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .gallery img {
-            width: 100%;
-            border-radius: 4px;
-            transition: transform 0.3s;
-        }
-        
-        .gallery img:hover {
-            transform: scale(1.03);
-        }
-        
-        .links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .link-card {
-            background-color: var(--secondary-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            width: 200px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        
-        .link-card:hover {
+        .card-hover:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
         
-        .link-card img {
-            width: 60px;
-            margin-bottom: 1rem;
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .contest-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        /* Concourse Modal Styles */
+        .concourse-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .concourse-container {
+            background-color: #23272A;
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.3;
+        }
+        
+        .logo-img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .rule-card {
+            background-color: #2a2f35;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            overflow: hidden;
+        }
+        
+        .rule-punishment {
+            background-color: rgba(255, 0, 0, 0.1);
+            border-left: 4px solid #f44336;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
         }
         
         .admin-panel {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
+            background-color: #1a1e23;
             border-radius: 8px;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            padding: 20px;
+            margin-bottom: 20px;
         }
         
-        .admin-panel h3 {
-            color: var(--accent-color);
-            margin-bottom: 1rem;
+        .status-closed {
+            background-color: #f44336;
         }
         
-        .form-group {
-            margin-bottom: 1rem;
+        .status-open {
+            background-color: #4CAF50;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
+        .admin-login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
         
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #004d32;
-        }
-        
-        .btn-danger {
-            background-color: var(--accent-color);
-        }
-        
-        .btn-danger:hover {
-            background-color: #6b0000;
-        }
-        
-        footer {
-            background-color: var(--primary-color);
-            color: var(--light-text);
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-        }
-        
-        .hidden {
-            display: none;
+        .admin-login-container {
+            background-color: #23272A;
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
         }
     </style>
 </head>
-<body>
-    <header>
-        <img src="https://cdn.discordapp.com/attachments/1246798785695186985/1368212989676884168/c7c40cf8b267991645061e83d024f6ea.png?ex=68288aa4&is=68273924&hm=3dc43d5d30afebd6f2d7ec70cc27b21bfb48dc73933f29a56e6022c1dc72d04b&" alt="Base Delta Logo" class="logo">
-        <h1>Base Delta - Esercito Italiano Roblox RP</h1>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#" onclick="showSection('home')">Home</a></li>
-            <li><a href="#" onclick="showSection('tryout')">Provini</a></li>
-            <li><a href="#" onclick="showSection('about')">Chi Siamo</a></li>
-            <li><a href="#" onclick="showSection('links')">Collegamenti</a></li>
-        </ul>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="discord-bg py-4 px-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="https://media.discordapp.net/attachments/1373722638202966016/1373756375712268419/Progetto_senza_titolo-removebg-preview.png?ex=682b91d3&is=682a4053&hm=193776e52c3336273663142b47012cb1a679d8f2ae1cdddeb5bf50ccbf9fd430&=&format=webp&quality=lossless&width=500&height=500" alt="BASE DELTA Logo" class="logo-img">
+                <h1 class="title-font text-2xl font-bold text-white">BASE DELTA</h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <button onclick="changeTab('home')" class="text-white hover:text-green-300 transition tab-button active-tab">Home</button>
+                <button onclick="changeTab('concourse')" class="text-white hover:text-green-300 transition tab-button">Concorsi</button>
+                <button onclick="changeTab('discord')" class="text-white hover:text-green-300 transition tab-button">Discord</button>
+                <button onclick="changeTab('rules')" class="text-white hover:text-green-300 transition tab-button">Regolamento</button>
+                <button onclick="showAdminLogin()" class="text-white hover:text-green-300 transition" id="admin-button">Admin</button>
+            </div>
+            <button class="md:hidden text-white text-2xl" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden discord-bg absolute top-16 left-0 right-0 py-4 px-6 shadow-lg" id="mobile-menu">
+            <div class="flex flex-col space-y-4">
+                <button onclick="changeTab('home')" class="text-white hover:text-green-300 transition tab-button active-tab">Home</button>
+                <button onclick="changeTab('concourse')" class="text-white hover:text-green-300 transition tab-button">Concorsi</button>
+                <button onclick="changeTab('discord')" class="text-white hover:text-green-300 transition tab-button">Discord</button>
+                <button onclick="changeTab('rules')" class="text-white hover:text-green-300 transition tab-button">Regolamento</button>
+                <button onclick="showAdminLogin()" class="text-white hover:text-green-300 transition" id="admin-button-mobile">Admin</button>
+            </div>
+        </div>
     </nav>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="admin-login-modal hidden">
+        <div class="admin-login-container">
+            <h2 class="title-font text-2xl font-bold text-white mb-6 text-center">Accesso Admin</h2>
+            <div class="mb-4">
+                <label for="admin-email" class="block text-gray-300 mb-2">Email:</label>
+                <input type="email" id="admin-email" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Inserisci la tua email">
+            </div>
+            <div class="mb-6">
+                <label for="admin-password" class="block text-gray-300 mb-2">Password:</label>
+                <input type="password" id="admin-password" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Inserisci la password">
+            </div>
+            <div class="flex space-x-4">
+                <button onclick="hideAdminLogin()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition">
+                    Annulla
+                </button>
+                <button onclick="adminLogin()" class="flex-1 discord-primary hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">
+                    Accedi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div id="home" class="tab-content active">
+        <section class="relative h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 overflow-hidden">
+            <img src="https://media.discordapp.net/attachments/1373722638202966016/1373756917167427586/11e6cb793429a21d505c1cd10cd7e8ea.jpg?ex=682b9254&is=682a40d4&hm=579c25b25204e151b563f0bb8999f191142aacbb536fdf5e9199f317766f597a&=&format=webp&width=1595&height=859" alt="Military Background" class="hero-bg">
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+            
+            <div class="container mx-auto px-6 z-10 text-center">
+                <h1 class="title-font text-5xl md:text-7xl font-bold mb-6 text-white glow">
+                    BENVENUTI IN <span class="text-green-400">BASE DELTA</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                    Una vivace comunità Discord dove il roleplay militare incontra la competizione. Partecipa ai nostri concorsi, immergiti nel RP e connettiti con appassionati come te.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://discord.gg/Gvdm3aAqcN" target="_blank" class="discord-primary hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 flex items-center justify-center space-x-2">
+                        <i class="fab fa-discord"></i>
+                        <span>Unisciti al Discord</span>
+                    </a>
+                    <button onclick="changeTab('concourse')" class="bg-transparent hover:bg-gray-800 text-white font-bold py-3 px-8 border-2 border-green-500 rounded-full text-lg transition duration-300">
+                        Partecipa ai Concorsi
+                    </button>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-900 to-transparent"></div>
+        </section>
+    </div>
     
-    <div class="container">
-        <!-- Home Section -->
-        <section id="home-section" class="section">
-            <h2>Benvenuti a Base Delta</h2>
-            <p>Base Delta è un server Discord RP dedicato alla simulazione dell'Esercito Italiano su Roblox. Il nostro obiettivo è ricreare un'esperienza autentica e coinvolgente per tutti gli appassionati di ruolo militare.</p>
+    <!-- Concourse Tab -->
+    <div id="concourse" class="tab-content py-16">
+        <section class="container mx-auto px-6">
+            <h2 class="title-font text-4xl font-bold mb-4 text-white text-center">
+                BASE DELTA <span class="text-green-400">Concorsi</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Partecipa ai nostri concorsi militari inserendo il tuo nickname Roblox per candidarti.
+            </p>
             
-            <h3>Informazioni Principali</h3>
-            <p>Il nostro server offre:</p>
-            <ul>
-                <li>Divisioni specializzate dell'Esercito Italiano</li>
-                <li>Eventi regolari e addestramenti</li>
-                <li>Una community attiva e rispettosa</li>
-                <li>Opportunità di crescita e promozioni</li>
-                <li>Simulazioni realistiche</li>
-            </ul>
-            
-            <h3>Unisciti a Noi</h3>
-            <p>Se sei interessato a far parte della nostra community, visita la sezione "Provini" per vedere quando si terranno i prossimi reclutamenti per le diverse divisioni.</p>
-        </section>
-        
-        <!-- Tryout Section -->
-        <section id="tryout-section" class="section hidden">
-            <h2>Provini delle Divisioni</h2>
-            <p>Qui puoi trovare le date dei prossimi provini per le nostre divisioni. Le date possono essere modificate dallo staff.</p>
-            
-            <div id="admin-login-tryout" class="admin-panel">
-                <h3>Accesso Staff</h3>
-                <div class="form-group">
-                    <label for="admin-email-tryout">Email Staff</label>
-                    <input type="email" id="admin-email-tryout" placeholder="Inserisci l'email autorizzata">
+            <!-- Admin Panel (visible only when logged in) -->
+            <div id="admin-panel" class="admin-panel hidden">
+                <h3 class="title-font text-xl font-bold text-white mb-4">Pannello di Controllo Admin</h3>
+                <div class="grid md:grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <label class="block text-gray-300 mb-2">Marina Militare:</label>
+                        <button onclick="toggleConcorsoStatus('marina')" id="marina-status-btn" class="w-full status-open text-white font-bold py-2 px-4 rounded">APERTO</button>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2">Aeronautica:</label>
+                        <button onclick="toggleConcorsoStatus('aeronautica')" id="aeronautica-status-btn" class="w-full status-open text-white font-bold py-2 px-4 rounded">APERTO</button>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2">Carabinieri:</label>
+                        <button onclick="toggleConcorsoStatus('carabinieri')" id="carabinieri-status-btn" class="w-full status-open text-white font-bold py-2 px-4 rounded">APERTO</button>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2">Comfose:</label>
+                        <button onclick="toggleConcorsoStatus('comfose')" id="comfose-status-btn" class="w-full status-open text-white font-bold py-2 px-4 rounded">APERTO</button>
+                    </div>
                 </div>
-                <button class="btn" onclick="loginTryoutAdmin()">Accedi</button>
+                <button onclick="adminLogout()" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                    Logout Admin
+                </button>
             </div>
             
-            <div id="tryout-admin-panel" class="admin-panel hidden">
-                <h3>Pannello Staff Provini</h3>
-                <div class="form-group">
-                    <label for="division-select">Divisione</label>
-                    <select id="division-select">
-                        <option value="carabinieri">Carabinieri</option>
-                        <option value="marina">Marina Militare</option>
-                        <option value="aereonautica">Aereonautica</option>
-                        <option value="bersaglieri">Bersaglieri</option>
-                        <option value="dfa">DFA</option>
-                        <option value="alpini">Alpini</option>
-                        <option value="comfose">COMFOSE</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="tryout-date">Data Provino</label>
-                    <input type="datetime-local" id="tryout-date">
-                </div>
-                <div class="form-group">
-                    <label for="tryout-image">URL Immagine (opzionale)</label>
-                    <input type="text" id="tryout-image" placeholder="Incolla URL immagine">
-                </div>
-                <button class="btn" onclick="updateTryout()">Aggiorna Provino</button>
-                <button class="btn btn-danger" onclick="logoutTryoutAdmin()">Esci</button>
-            </div>
-            
-            <div class="tryout-grid" id="tryout-container">
-                <!-- Tryout cards will be generated here -->
-            </div>
-        </section>
-        
-        <!-- About Us Section -->
-        <section id="about-section" class="section hidden">
-            <h2>Chi Siamo</h2>
-            <p>Base Delta è una community dedicata alla simulazione dell'Esercito Italiano su Roblox. Siamo un gruppo di appassionati che condividono l'interesse per il ruolo militare e la simulazione realistica.</p>
-            
-            <div id="admin-login-about" class="admin-panel">
-                <h3>Accesso Staff</h3>
-                <div class="form-group">
-                    <label for="admin-email-about">Email Staff</label>
-                    <input type="email" id="admin-email-about" placeholder="Inserisci l'email autorizzata">
-                </div>
-                <button class="btn" onclick="loginAboutAdmin()">Accedi</button>
-            </div>
-            
-            <div id="about-admin-panel" class="admin-panel hidden">
-                <h3>Pannello Staff Galleria</h3>
-                <div class="form-group">
-                    <label for="image-url">URL Immagine</label>
-                    <input type="text" id="image-url" placeholder="Incolla URL immagine">
-                </div>
-                <button class="btn" onclick="addImageToGallery()">Aggiungi Immagine</button>
-                <button class="btn btn-danger" onclick="logoutAboutAdmin()">Esci</button>
-            </div>
-            
-            <h3>La Nostra Bacheca</h3>
-            <div class="gallery" id="gallery-container">
-                <!-- Gallery images will be generated here -->
-            </div>
-        </section>
-        
-        <!-- Links Section -->
-        <section id="links-section" class="section hidden">
-            <h2>Collegamenti</h2>
-            <p>Unisciti alla nostra community o visita i nostri spazi su Roblox!</p>
-            
-            <div class="links">
-                <div class="link-card">
-                    <img src="https://via.placeholder.com/60?text=Discord" alt="Discord">
-                    <h3>Discord</h3>
-                    <p>Unisciti al nostro server</p>
-                    <button class="btn" onclick="window.open('https://discord.gg/example', '_blank')">Entra</button>
+            <!-- Contest Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8" id="contest-cards-container">
+                <!-- Contest 1: Marina Militare -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg card-hover">
+                    <img src="https://media.discordapp.net/attachments/1373722638202966016/1373758085004267631/FREMM20marina-militare.png?ex=682b936a&is=682a41ea&hm=81af654b41b1eef1dcdf480b543e2cd74d3882df68bb5818ce9d9c3fc6b20616&=&format=webp&quality=lossless&width=615&height=438" alt="Marina Militare" class="contest-image w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="title-font text-xl font-bold text-white">Marina Militare</h3>
+                            <span id="marina-status-badge" class="text-xs bg-green-500 text-black px-2 py-1 rounded">APERTO</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Concorso per entrare nella prestigiosa Marina Militare italiana.</p>
+                        <div class="flex justify-center">
+                            <button onclick="openConcourseModal('Marina Militare', 'marina')" id="marina-apply-btn" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg text-sm transition">
+                                Candidati Ora
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="link-card">
-                    <img src="https://via.placeholder.com/60?text=Roblox" alt="Roblox">
-                    <h3>Gruppo Roblox</h3>
-                    <p>Visita il nostro gruppo</p>
-                    <button class="btn" onclick="window.open('https://www.roblox.com/groups/example', '_blank')">Vai</button>
+                <!-- Contest 2: Aeronautica Militare -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg card-hover">
+                    <img src="https://cdn.discordapp.com/attachments/1373722638202966016/1373757962266611803/313930104_5826820594043386_5093152559288537598_n.png?ex=682b934d&is=682a41cd&hm=924cf2d0fc67f8af44f8321870a55612f9bb42f4f072c2d9d233079eb4704c97&" alt="Aeronautica Militare" class="contest-image w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="title-font text-xl font-bold text-white">Aeronautica Militare</h3>
+                            <span id="aeronautica-status-badge" class="text-xs bg-green-500 text-black px-2 py-1 rounded">APERTO</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Diventa un pilota dell'Aeronautica Militare italiana.</p>
+                        <div class="flex justify-center">
+                            <button onclick="openConcourseModal('Aeronautica Militare', 'aeronautica')" id="aeronautica-apply-btn" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg text-sm transition">
+                                Candidati Ora
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="link-card">
-                    <img src="https://via.placeholder.com/60?text=Mappa" alt="Mappa">
-                    <h3>Mappa Roblox</h3>
-                    <p>Gioca nella nostra mappa</p>
-                    <button class="btn" onclick="window.open('https://www.roblox.com/games/example', '_blank')">Gioca</button>
+                <!-- Contest 3: Carabinieri -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg card-hover">
+                    <img src="https://media.discordapp.net/attachments/1373722638202966016/1373758193787867186/OIP.png?ex=682b9384&is=682a4204&hm=43e3cd5b08e01bf353743bb93ed7ba5850c753920055b13d273eb770ca45686c&=&format=webp&quality=lossless&width=593&height=408" alt="Carabinieri" class="contest-image w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="title-font text-xl font-bold text-white">Carabinieri</h3>
+                            <span id="carabinieri-status-badge" class="text-xs bg-green-500 text-black px-2 py-1 rounded">APERTO</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Unisciti all'Arma dei Carabinieri italiani.</p>
+                        <div class="flex justify-center">
+                            <button onclick="openConcourseModal('Carabinieri', 'carabinieri')" id="carabinieri-apply-btn" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg text-sm transition">
+                                Candidati Ora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contest 4: Comfose -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg card-hover">
+                    <img src="https://media.discordapp.net/attachments/1373722638202966016/1373757830036979883/GettyImages-1413636401.png?ex=682b932d&is=682a41ad&hm=cfd8e96662f491a2a655ede7c4af2214db790d47ee58bafd00a5331e2c34f84f&=&format=webp&quality=lossless&width=1289&height=859" alt="Comfose" class="contest-image w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="title-font text-xl font-bold text-white">Comfose</h3>
+                            <span id="comfose-status-badge" class="text-xs bg-green-500 text-black px-2 py-1 rounded">APERTO</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Forze Speciali dell'Esercito Italiano.</p>
+                        <div class="flex justify-center">
+                            <button onclick="openConcourseModal('Comfose', 'comfose')" id="comfose-apply-btn" class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg text-sm transition">
+                                Candidati Ora
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
     
-    <footer>
-        <p>&copy; 2023 Base Delta - Esercito Italiano Roblox RP. Tutti i diritti riservati.</p>
-    </footer>
+    <!-- Discord Tab -->
+    <div id="discord" class="tab-content py-16">
+        <section class="container mx-auto px-6 text-center">
+            <h2 class="title-font text-4xl font-bold mb-4 text-white">
+                Unisciti al nostro <span class="text-green-400">Discord</span>
+            </h2>
+            <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                Entra nella nostra community Discord per interagire con altri membri, ricevere aggiornamenti e partecipare agli eventi!
+            </p>
+            <a href="https://discord.gg/Gvdm3aAqcN" target="_blank" class="discord-primary hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full text-lg inline-flex items-center space-x-2 transition">
+                <i class="fab fa-discord"></i>
+                <span>Entra nel Server Discord</span>
+            </a>
+            
+            <div class="mt-12 max-w-4xl mx-auto">
+                <h3 class="title-font text-2xl font-bold text-white mb-6">Gruppo Roblox</h3>
+                <a href="https://www.roblox.com/it/communities/33500087/Comando-delle-Forze-Speciali-dellEsercito-COMFO#!/about" target="_blank" class="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 flex items-center justify-center space-x-4 transition card-hover max-w-md mx-auto">
+                    <div class="bg-red-600 p-4 rounded-lg">
+                        <i class="fab fa-roblox text-3xl text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="title-font text-xl font-bold text-white">Gruppo Roblox</h3>
+                        <p class="text-gray-400">Comando delle Forze Speciali</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
     
+    <!-- Rules Tab -->
+    <div id="rules" class="tab-content py-16">
+        <section class="container mx-auto px-6 max-w-4xl">
+            <h2 class="title-font text-4xl font-bold mb-8 text-white text-center">
+                <span class="text-green-400">REGOLAMENTO GENERALE</span> BASE DELTA
+            </h2>
+            <p class="text-gray-300 mb-8 text-center">
+                Qui sotto potrai trovare le informazioni e i principali documenti che ogni membro di BASE DELTA dovrà OBBLIGATORIAMENTE rispettare per evitare di andare contro a punizioni o provvedimenti disciplinari anche più gravi.
+            </p>
+            
+            <div class="space-y-6">
+                <!-- Rule 1 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 001</h3>
+                    <p class="text-gray-300">Non si potrà utilizzare nessun tipo di comando quali :fly :bring :to :track ecc... se non per casi particolari come attività organizzate o operazioni di amministrazione.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Sospensione dal servizio</li>
+                            <li>Degrado (di più gradi se con aggravante di recidività)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 2 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 002</h3>
+                    <p class="text-gray-300">Il comando :track non potrà essere utilizzato sui membri del dipartimento oppure su membri ministeriali+.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Sospensione dal servizio</li>
+                            <li>Degrado (di più gradi se con aggravante di recidività)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 3 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 003</h3>
+                    <p class="text-gray-300">E' ASSOLUTAMENTE e CATEGORICAMENTE vietato guidare macchine o pilotare velivoli senza le apposite patenti e qualifiche.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Sospensione dal servizio</li>
+                            <li>Degrado (di più gradi se con aggravante di recidività oppure danneggiamento di strutture)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 4 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 004</h3>
+                    <p class="text-gray-300">E' ASSOLUTAMENTE e CATEGORICAMENTE vietato l'abuso di admin o di potere da parte di QUALSIASI membro della community.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Degrado di 1 o più gradi</li>
+                            <li>Blacklist da BASE DELTA (Nei casi di recidività aggravata)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 5 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 005</h3>
+                    <p class="text-gray-300">E' ASSOLUTAMENTE e CATEGORICAMENTE vietato l'accesso alle zone dipartimentali e ministeriali.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Blacklist da BASE DELTA</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 6 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 006</h3>
+                    <p class="text-gray-300">E' ASSOLUTAMENTE e CATEGORICAMENTE vietata la divulgazione di identità segrete dipartimentali e o di documenti redatti.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Blacklist da BASE DELTA</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 7 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 007</h3>
+                    <p class="text-gray-300">E' ASSOLUTAMENTE e CATEGORICAMENTE vietato utilizzare soundboard di QUALSIASI tipo in situazioni formali, corsi, provini o riunioni.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Richiamo verbale</li>
+                            <li>Richiamo formale</li>
+                            <li>Mute da 1 ora alle 5 ore</li>
+                            <li>Sospensione da 1 a 3 giorni (nei casi di recidività)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 8 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 008</h3>
+                    <p class="text-gray-300">E' vietato divulgare informazioni proprie personali o di qualsiasi altro membro della community.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Richiamo formale</li>
+                            <li>Sospensione da 1 a 3 giorni (nei casi di recidività)</li>
+                            <li>Blacklist permanente (nei casi più gravi come doxing)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 9 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 009</h3>
+                    <p class="text-gray-300">E' vietato mandare link di server non affiliati ad AMI oppure link a server NSFW o simili, è inoltre vietata la divulgazione di materiale NSFW nei canali pubblici.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Sospensione da 1 a 3 giorni</li>
+                            <li>Degrado (di 1 o più gradi se con aggravante di recidività)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 10 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 010</h3>
+                    <p class="text-gray-300">E' vietato avere qualsiasi tipo di forma di razzismo contro qualsiasi membro della community, oppure avere atteggiamenti estremisti.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Sospensione da 1 a 3 giorni</li>
+                            <li>Degrado (di 1 o più gradi se con aggravante di recidività)</li>
+                            <li>Blacklist permanente se con aggravante bullismo e terrorismo psicologico</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 11 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 011</h3>
+                    <p class="text-gray-300">E' vietati mandare messaggi/gif/sticker con riferimenti politici e/o Fascisti o Razzisti.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Sospensione da 1 a 3 giorni</li>
+                            <li>Degrado (di 1 o più gradi se con aggravante di recidività)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 12 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 012</h3>
+                    <p class="text-gray-300">E' vietato utilizzare un linguaggio blasfemo e o avere linguaggi che possono causare disagio ai membri della community di BASE DELTA.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Sospensione da 1 a 3 giorni</li>
+                            <li>Degrado (di 1 o più gradi se con aggravante di recidività)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Rule 13 -->
+                <div class="rule-card p-6">
+                    <h3 class="title-font text-xl font-bold text-white mb-2">REGOLA N° 0013</h3>
+                    <p class="text-gray-300">E' vietato utilizzare in modo poco appropriato il bot di musica, soprattutto in casi speciali o eventi o attività organizzate.</p>
+                    <div class="rule-punishment">
+                        <h4 class="font-bold text-white mb-1">PROVVEDIMENTI DISCIPLINARI:</h4>
+                        <ul class="list-disc list-inside text-gray-300">
+                            <li>Sospensione da 1 a 3 giorni</li>
+                            <li>Degrado (di 1 o più gradi se con aggravante di recidività)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center text-gray-400">
+                <p>OGNI INFRAZIONE DI QUESTE REGOLE COMPORTERA' AD UN PROVVEDIMENTO DISCIPLINARE IN BASE ALLA GRAVITA' DEL GESTO.</p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Concourse Modal -->
+    <div id="concourse-modal" class="concourse-modal hidden">
+        <div class="concourse-container">
+            <h2 id="concourse-modal-title" class="title-font text-2xl font-bold text-white mb-4">Concorso</h2>
+            <p class="text-gray-300 mb-6">Inserisci il tuo nickname Roblox per candidarti a questo concorso.</p>
+            
+            <div class="mb-6">
+                <label for="roblox-nickname" class="block text-gray-300 text-left mb-2">Nickname Roblox:</label>
+                <input type="text" id="roblox-nickname" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Inserisci il tuo nickname esatto">
+            </div>
+            
+            <div class="flex space-x-4">
+                <button onclick="closeConcourseModal()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition">
+                    Annulla
+                </button>
+                <button onclick="submitConcourseApplication()" class="flex-1 discord-primary hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">
+                    Invia
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="discord-bg py-12 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-6 md:mb-0">
+                    <img src="https://media.discordapp.net/attachments/1373722638202966016/1373756375712268419/Progetto_senza_titolo-removebg-preview.png?ex=682b91d3&is=682a4053&hm=193776e52c3336273663142b47012cb1a679d8f2ae1cdddeb5bf50ccbf9fd430&=&format=webp&quality=lossless&width=500&height=500" alt="BASE DELTA Logo" class="logo-img">
+                    <h2 class="title-font text-2xl font-bold text-white">BASE DELTA</h2>
+                </div>
+                
+                <div class="flex space-x-6 mb-6 md:mb-0">
+                    <button onclick="changeTab('home')" class="text-gray-400 hover:text-green-300 transition">Home</button>
+                    <button onclick="changeTab('concourse')" class="text-gray-400 hover:text-green-300 transition">Concorsi</button>
+                    <button onclick="changeTab('discord')" class="text-gray-400 hover:text-green-300 transition">Discord</button>
+                    <button onclick="changeTab('rules')" class="text-gray-400 hover:text-green-300 transition">Regolamento</button>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="https://discord.gg/Gvdm3aAqcN" target="_blank" class="text-gray-400 hover:text-green-300 transition text-xl">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://www.roblox.com/it/communities/33500087/Comando-delle-Forze-Speciali-dellEsercito-COMFO#!/about" target="_blank" class="text-gray-400 hover:text-green-300 transition text-xl">
+                        <i class="fab fa-roblox"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 Comunità BASE DELTA. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Admin credentials (to be set by the site creator)
-        const ADMIN_EMAIL = "admin@basedelta.com"; // CHANGE THIS TO YOUR EMAIL
+        let currentConcourse = "";
+        let currentConcourseType = "";
+        let isAdminLoggedIn = false;
         
-        // Tryout data
-        let tryouts = {
-            carabinieri: {
-                date: "2023-06-15T18:00",
-                image: "https://cdn.discordapp.com/attachments/1246798785695186985/1368212989676884168/c7c40cf8b267991645061e83d024f6ea.png?ex=68288aa4&is=68273924&hm=3dc43d5d30afebd6f2d7ec70cc27b21bfb48dc73933f29a56e6022c1dc72d04b&"
-            },
-            marina: {
-                date: "2023-06-16T18:00",
-                image: "https://via.placeholder.com/300x200?text=Marina+Militare"
-            },
-            aereonautica: {
-                date: "2023-06-17T18:00",
-                image: "https://via.placeholder.com/300x200?text=Aereonautica"
-            },
-            bersaglieri: {
-                date: "2023-06-18T18:00",
-                image: "https://via.placeholder.com/300x200?text=Bersaglieri"
-            },
-            dfa: {
-                date: "2023-06-19T18:00",
-                image: "https://via.placeholder.com/300x200?text=DFA"
-            },
-            alpini: {
-                date: "2023-06-20T18:00",
-                image: "https://via.placeholder.com/300x200?text=Alpini"
-            },
-            comfose: {
-                date: "2023-06-21T18:00",
-                image: "https://via.placeholder.com/300x200?text=COMFOSE"
-            }
+        // Concorso status (default: all open)
+        const concorsiStatus = {
+            marina: true,
+            aeronautica: true,
+            carabinieri: true,
+            comfose: true
         };
         
-        // Gallery images
-        let galleryImages = [
-            "https://via.placeholder.com/300x200?text=Evento+1",
-            "https://via.placeholder.com/300x200?text=Evento+2",
-            "https://via.placeholder.com/300x200?text=Evento+3"
-        ];
-        
-        // Show section function
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.add('hidden');
+        // Tab functionality
+        function changeTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
             });
             
-            document.getElementById(sectionId + '-section').classList.remove('hidden');
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Update active tab button
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active-tab');
+            });
+            
+            // For mobile menu
+            document.getElementById('mobile-menu').classList.add('hidden');
+            
+            // Scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
         
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            showSection('home');
-            renderTryouts();
-            renderGallery();
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
         });
         
-        // Render tryout cards
-        function renderTryouts() {
-            const container = document.getElementById('tryout-container');
-            container.innerHTML = '';
+        // Admin functions
+        function showAdminLogin() {
+            document.getElementById('admin-login-modal').classList.remove('hidden');
+        }
+        
+        function hideAdminLogin() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+        }
+        
+        function adminLogin() {
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
             
-            const divisions = [
-                { id: 'carabinieri', name: 'Carabinieri' },
-                { id: 'marina', name: 'Marina Militare' },
-                { id: 'aereonautica', name: 'Aereonautica' },
-                { id: 'bersaglieri', name: 'Bersaglieri' },
-                { id: 'dfa', name: 'DFA' },
-                { id: 'alpini', name: 'Alpini' },
-                { id: 'comfose', name: 'COMFOSE' }
-            ];
-            
-            divisions.forEach(division => {
-                const tryout = tryouts[division.id];
-                const date = new Date(tryout.date);
-                const formattedDate = date.toLocaleString('it-IT', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
+            // Only allow access with specific email
+            if (email === "alessioregista@gmail.com" && password) {
+                isAdminLoggedIn = true;
+                document.getElementById('admin-panel').classList.remove('hidden');
+                hideAdminLogin();
                 
-                const card = document.createElement('div');
-                card.className = 'tryout-card';
-                card.innerHTML = `
-                    <h3>${division.name}</h3>
-                    <p class="date">${formattedDate}</p>
-                    <img src="${tryout.image}" alt="${division.name}">
-                `;
+                // Update admin button
+                document.getElementById('admin-button').textContent = "Logout";
+                document.getElementById('admin-button-mobile').textContent = "Logout";
                 
-                container.appendChild(card);
-            });
-        }
-        
-        // Render gallery images
-        function renderGallery() {
-            const container = document.getElementById('gallery-container');
-            container.innerHTML = '';
-            
-            galleryImages.forEach(imageUrl => {
-                const img = document.createElement('img');
-                img.src = imageUrl;
-                img.alt = "Galleria Base Delta";
-                container.appendChild(img);
-            });
-        }
-        
-        // Admin functions for tryout section
-        function loginTryoutAdmin() {
-            const email = document.getElementById('admin-email-tryout').value;
-            
-            if (email === ADMIN_EMAIL) {
-                document.getElementById('admin-login-tryout').classList.add('hidden');
-                document.getElementById('tryout-admin-panel').classList.remove('hidden');
+                alert("Accesso admin effettuato con successo!");
             } else {
-                alert('Email non autorizzata');
+                alert("Credenziali non valide. Solo l'amministratore può accedere.");
             }
         }
         
-        function logoutTryoutAdmin() {
-            document.getElementById('admin-login-tryout').classList.remove('hidden');
-            document.getElementById('tryout-admin-panel').classList.add('hidden');
-            document.getElementById('admin-email-tryout').value = '';
+        function adminLogout() {
+            isAdminLoggedIn = false;
+            document.getElementById('admin-panel').classList.add('hidden');
+            
+            // Update admin button
+            document.getElementById('admin-button').textContent = "Admin";
+            document.getElementById('admin-button-mobile').textContent = "Admin";
+            
+            alert("Logout effettuato con successo!");
         }
         
-        function updateTryout() {
-            const division = document.getElementById('division-select').value;
-            const date = document.getElementById('tryout-date').value;
-            const image = document.getElementById('tryout-image').value;
+        function toggleConcorsoStatus(concorsoType) {
+            concorsiStatus[concorsoType] = !concorsiStatus[concorsoType];
+            updateConcorsoStatus(concorsoType);
+        }
+        
+        function updateConcorsoStatus(concorsoType) {
+            const isOpen = concorsiStatus[concorsoType];
+            const statusBtn = document.getElementById(`${concorsoType}-status-btn`);
+            const statusBadge = document.getElementById(`${concorsoType}-status-badge`);
+            const applyBtn = document.getElementById(`${concorsoType}-apply-btn`);
             
-            if (division && date) {
-                tryouts[division].date = date;
-                if (image) tryouts[division].image = image;
-                
-                renderTryouts();
-                alert('Provino aggiornato con successo!');
+            if (isOpen) {
+                statusBtn.textContent = "APERTO";
+                statusBtn.classList.remove('status-closed');
+                statusBtn.classList.add('status-open');
+                statusBadge.textContent = "APERTO";
+                statusBadge.classList.remove('bg-red-500');
+                statusBadge.classList.add('bg-green-500');
+                applyBtn.disabled = false;
+                applyBtn.classList.remove('bg-gray-500', 'cursor-not-allowed');
+                applyBtn.classList.add('bg-green-600', 'hover:bg-green-700');
             } else {
-                alert('Per favore, compila tutti i campi richiesti');
+                statusBtn.textContent = "CHIUSO";
+                statusBtn.classList.remove('status-open');
+                statusBtn.classList.add('status-closed');
+                statusBadge.textContent = "CHIUSO";
+                statusBadge.classList.remove('bg-green-500');
+                statusBadge.classList.add('bg-red-500');
+                applyBtn.disabled = true;
+                applyBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                applyBtn.classList.add('bg-gray-500', 'cursor-not-allowed');
             }
         }
         
-        // Admin functions for about section
-        function loginAboutAdmin() {
-            const email = document.getElementById('admin-email-about').value;
+        // Concourse modal functions
+        function openConcourseModal(concourseName, concourseType) {
+            // Check if concorso is open
+            if (!concorsiStatus[concourseType]) {
+                alert("Le candidature per questo concorso sono attualmente chiuse.");
+                return;
+            }
             
-            if (email === ADMIN_EMAIL) {
-                document.getElementById('admin-login-about').classList.add('hidden');
-                document.getElementById('about-admin-panel').classList.remove('hidden');
-            } else {
-                alert('Email non autorizzata');
+            currentConcourse = concourseName;
+            currentConcourseType = concourseType;
+            document.getElementById('concourse-modal-title').textContent = `Concorso: ${concourseName}`;
+            document.getElementById('concourse-modal').classList.remove('hidden');
+        }
+        
+        function closeConcourseModal() {
+            document.getElementById('concourse-modal').classList.add('hidden');
+            document.getElementById('roblox-nickname').value = "";
+        }
+        
+        function submitConcourseApplication() {
+            const nickname = document.getElementById('roblox-nickname').value.trim();
+            
+            if (!nickname) {
+                alert("Per favore inserisci il tuo nickname Roblox");
+                return;
+            }
+            
+            // Check if concorso is still open (in case it was closed while modal was open)
+            if (!concorsiStatus[currentConcourseType]) {
+                alert("Le candidature per questo concorso sono state chiuse. Riprova più tardi.");
+                closeConcourseModal();
+                return;
+            }
+            
+            // Send the webhook to Discord
+            sendWebhook(nickname);
+            
+            // Show success message
+            alert(`Candidatura inviata con successo per ${currentConcourse}!\nNickname: ${nickname}`);
+            closeConcourseModal();
+        }
+        
+        function sendWebhook(nickname) {
+            const webhookUrl = "https://discord.com/api/webhooks/1373722769182687302/d3XFja_ypwuQ85tAZn9gXlbEHaau9PjGfLhRURdtyZbJs4Wb_aL1dlAF1tnwqzFSb7nY";
+            
+            const data = {
+                content: `Nuova candidatura per **${currentConcourse}**\nNickname Roblox: **${nickname}**`,
+                embeds: [{
+                    title: "Nuova Candidatura",
+                    description: `Un nuovo utente si è candidato per il concorso ${currentConcourse}`,
+                    fields: [
+                        {
+                            name: "Nickname Roblox",
+                            value: nickname,
+                            inline: true
+                        },
+                        {
+                            name: "Data",
+                            value: new Date().toLocaleString(),
+                            inline: true
+                        },
+                        {
+                            name: "Stato Concorsi",
+                            value: `Marina: ${concorsiStatus.marina ? "Aperto" : "Chiuso"}\nAeronautica: ${concorsiStatus.aeronautica ? "Aperto" : "Chiuso"}\nCarabinieri: ${concorsiStatus.carabinieri ? "Aperto" : "Chiuso"}\nComfose: ${concorsiStatus.comfose ? "Aperto" : "Chiuso"}`,
+                            inline: false
+                        }
+                    ],
+                    color: 0x4CAF50 // Green color
+                }]
+            };
+            
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).catch(error => console.error("Error sending webhook:", error));
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById("concourse-modal");
+            if (event.target == modal) {
+                closeConcourseModal();
+            }
+            
+            const adminModal = document.getElementById("admin-login-modal");
+            if (event.target == adminModal) {
+                hideAdminLogin();
             }
         }
         
-        function logoutAboutAdmin() {
-            document.getElementById('admin-login-about').classList.remove('hidden');
-            document.getElementById('about-admin-panel').classList.add('hidden');
-            document.getElementById('admin-email-about').value = '';
-        }
-        
-        function addImageToGallery() {
-            const imageUrl = document.getElementById('image-url').value;
-            
-            if (imageUrl) {
-                galleryImages.push(imageUrl);
-                renderGallery();
-                document.getElementById('image-url').value = '';
-                alert('Immagine aggiunta alla galleria!');
-            } else {
-                alert('Per favore, inserisci un URL valido');
-            }
-        }
+        // Initialize with home tab active
+        changeTab('home');
     </script>
 </body>
 </html>
